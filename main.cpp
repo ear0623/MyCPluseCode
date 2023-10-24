@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+	cout << "Test" << endl;
 	//srand(time(nullptr));
 	//bool Decision = ((rand() % 2) == 0);//나머지 연산자
 	//랜덤함수 실제로는 전혀 쓰면 안됨
