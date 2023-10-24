@@ -4,105 +4,68 @@
 
 using namespace std;
 
-class MyCharater
+class MyCharacter
 {
 public:
-	MyCharater();
-	~MyCharater();
+	MyCharacter();
+	~MyCharacter();
+	
 public:
-	void gotoxy(int x, int y);
-	void Move();
+	void CharacterMove();
 
 private:
-
+	int Key;
 	int PlayerX;
-	int playerY;
+	int PlayerY;
+	bool bRunning;
+
 
 };
 
-MyCharater::MyCharater()
+MyCharacter::MyCharacter()
 {
 	PlayerX = 0;
-	playerY = 0;
-    bool bIsRunning = true;
-    char PlayerShape = 'p';
+	PlayerY = 0;
+	bRunning = true;
+
 }
 
-MyCharater::~MyCharater()
+MyCharacter::~MyCharacter()
 {
 }
 
-void MyCharater::gotoxy(int x, int y)
+void MyCharacter::CharacterMove()
 {
-	COORD pos = { x,y };
-	//커서 이동
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-	cout << PlayerShape << endl;
+	Key = _getch();
+
+	while (bRunning)
+	{
+		if ((Key == 'a') || (Key == 'A'))
+		{
+
+		}
+	}
 }
 
-void MyCharater::Move()
+class MyMap
 {
-    while (bIsRunning)
-    {
-        int Key = _getch();
+public:
+	MyMap();
+	~MyMap();
 
-        system("cls");
-    
+private:
 
-        if ((Key == 'a')  Key == 'A')
-        {
-            cout << "왼쪽" << endl;
-            PlayerX--;
-        }
-        else if ((Key == 'd')  Key == 'D')
-        {
-            cout << "오른쪽" << endl;
-            PlayerX++;
-        }
+};
 
-        else if ((Key == 'w')  Key == 'W')
-        {
-            cout << "위" << endl;
-            PlayerY--;
-        }
-
-        else if ((Key == 's')  Key == 'S')
-        {
-            cout << "아래" << endl;
-            PlayerY++;
-        }
-        else if (Key == 'q' || Key == 'Q')
-        {
-            cout << "종료" << endl;
-            bIsRunning = false;
-        }
-
-     
-
-        //X, Y 좌표설정
-        COORD pos = { PlayerX, PlayerY };
-
-        //커서 이동
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-
-        cout << PlayerShape;
-    }
-
-}
+MyMap::MyMap()
+{
 }
 
-
-
-
-
-
+MyMap::~MyMap()
+{
+}
 
 int main()
 {
-	gotoxy(15, 15);
-	void
-
-
 	return 0;
 }
-
