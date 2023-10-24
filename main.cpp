@@ -3,10 +3,12 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+#include <mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 
 #define Width  100
 #define Height 25
-#define StartX 50
+#define StartX 3
 #define StartY 15
 #define Celling 0
 #define XCelling 0
@@ -30,6 +32,7 @@ private:
 	int Key;
 	int PlayerX;
 	int PlayerY;
+	int ZeroBase;
 	bool bRunning;
 
 
@@ -39,6 +42,7 @@ MyCharacter::MyCharacter()
 {
 	PlayerX = 0;
 	PlayerY = 0;
+	ZeroBase = 0;
 	bRunning = true;
 
 }
@@ -56,10 +60,10 @@ void MyCharacter::CharacterMove()
 		
 		if ((Key == 'a') || (Key == 'A'))
 		{
-			if (PlayerX == XCelling+1)
+			if (PlayerX == (ZeroBase+1))
 			{
 				
-				PlayerX = XCelling+1;
+				PlayerX = ZeroBase+1;
 			}
 			else
 			{
@@ -70,9 +74,9 @@ void MyCharacter::CharacterMove()
 		}
 		else if ((Key == 'd') || (Key == 'D'))
 		{
-			if (PlayerX == 98)
+			if (PlayerX == Width - XCelling-1)
 			{
-				PlayerX = 98;
+				PlayerX = Width - XCelling-1;
 			}
 			else
 			{
@@ -83,9 +87,9 @@ void MyCharacter::CharacterMove()
 		}
 		else if ((Key == 'w') || (Key == 'W'))
 		{
-			if (PlayerY == Celling+1)
+			if (PlayerY == ZeroBase+1)
 			{
-				PlayerY = Celling + 1;
+				PlayerY = ZeroBase + 1;
 			}
 			else
 			{
@@ -95,9 +99,9 @@ void MyCharacter::CharacterMove()
 		}
 		else if ((Key == 's') || (Key == 'S'))
 		{
-			if (PlayerY == Height-1)
+			if (PlayerY == (Height-Celling)-1)
 			{
-				PlayerY = Height - 1;
+				PlayerY = (Height - Celling) - 1;
 			}
 			else
 			{
@@ -186,9 +190,9 @@ MyMap::~MyMap()
 
 void MyMap::Draw()
 {
-	for (int i = LeftWall; i <= Vertical; i++)
+	for (int i = TopWall; i <= (Vertical); i++)
 	{
-		for (int j = TopWall; j <= Horizen; j++)
+		for (int j = LeftWall; j <= (Horizen); j++)
 		{
 			if ((i == LeftWall)||(i==Vertical)||(j== TopWall)||(j==Horizen))
 			{
@@ -204,16 +208,24 @@ void MyMap::Draw()
 	}
 }
 
+void MyPlaySound();
+
 int main()
 {
 
 	MyCharacter Character_main;
 	MyMap Map_main;
 	Map_main.Draw();
+	MyPlaySound();
 	//define 함수로 지정한 숫자는 왜
 	Character_main.Start(StartX, StartY);
 	Character_main.CharacterMove();
 	
 
 	return 0;
+}
+
+void MyPlaySound()
+{
+	PlaySound(TEXT("D:\\ETERBUS\\myC++\\MyCPluseCode\\MySourse\\BGM.WAV"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 }
