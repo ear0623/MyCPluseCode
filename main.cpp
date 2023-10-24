@@ -4,83 +4,105 @@
 
 using namespace std;
 
+class MyCharater
+{
+public:
+	MyCharater();
+	~MyCharater();
+public:
+	void gotoxy(int x, int y);
+	void Move();
+
+private:
+
+	int PlayerX;
+	int playerY;
+
+};
+
+MyCharater::MyCharater()
+{
+	PlayerX = 0;
+	playerY = 0;
+    bool bIsRunning = true;
+    char PlayerShape = 'p';
+}
+
+MyCharater::~MyCharater()
+{
+}
+
+void MyCharater::gotoxy(int x, int y)
+{
+	COORD pos = { x,y };
+	//커서 이동
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+	cout << PlayerShape << endl;
+}
+
+void MyCharater::Move()
+{
+    while (bIsRunning)
+    {
+        int Key = _getch();
+
+        system("cls");
+    
+
+        if ((Key == 'a')  Key == 'A')
+        {
+            cout << "왼쪽" << endl;
+            PlayerX--;
+        }
+        else if ((Key == 'd')  Key == 'D')
+        {
+            cout << "오른쪽" << endl;
+            PlayerX++;
+        }
+
+        else if ((Key == 'w')  Key == 'W')
+        {
+            cout << "위" << endl;
+            PlayerY--;
+        }
+
+        else if ((Key == 's')  Key == 'S')
+        {
+            cout << "아래" << endl;
+            PlayerY++;
+        }
+        else if (Key == 'q' || Key == 'Q')
+        {
+            cout << "종료" << endl;
+            bIsRunning = false;
+        }
+
+     
+
+        //X, Y 좌표설정
+        COORD pos = { PlayerX, PlayerY };
+
+        //커서 이동
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+
+        cout << PlayerShape;
+    }
+
+}
+}
+
+
+
+
+
 
 
 int main()
 {
-	cout << "Test" << endl;
-	//srand(time(nullptr));
-	//bool Decision = ((rand() % 2) == 0);//나머지 연산자
-	//랜덤함수 실제로는 전혀 쓰면 안됨
-	//int Number;
-	//cin >> Number;
+	gotoxy(15, 15);
+	void
 
-	//int Result = Number % 2;
-
-	//if (Result==1)
-	/* {
-		cout << "홀수" << endl;
-
-	}
-	else
-	{
-		cout << "짝수" << endl;
-
-	}*/
-
-	
-	
-	int PlayerX = 1;
-	int PlayerY = 1;
-	
-	while (true)
-	{
-
-		
-		char PlayerShape = 'p';
-		bool bInsRunning = true;
-
-		int key = _getch();
-
-		system("cls");//게임만들때는 쓰지마 해킹당해
-
-		if (key == 'a' || key == 'A')
-		{
-			cout << "ㅁ";
-			PlayerX--;
-		}
-		else if (key == 'w' || key == 'W')
-		{
-			cout << "ㅁ";
-			PlayerY--;
-		}
-		else if (key == 'd' || key == 'D')
-		{
-			cout << "ㅁ";
-			PlayerX++;
-		}
-		else if (key == 's' || key == 'S')
-		{
-			cout << "ㅁ" << endl;
-			PlayerY++;
-		}
-		else if (key == 'q' || key == 'Q')
-		{
-			cout << "End" << endl;
-		}
-		else
-		{
-
-		}
-		cout << PlayerX << "," << PlayerY << endl;
-		//x, y 좌표 설정
-		COORD pos = { PlayerX,PlayerY };
-		//커서 이동
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-		cout << PlayerShape << endl;
-	}
-
-	
 
 	return 0;
 }
+
